@@ -1,8 +1,11 @@
 const express = require('express');
+const fs = require('fs-extra');
+const authRoutes = require("./routes/authRoutes");
+const path = require('path');
 const app= express();
 
 app.use(express.json());
-const PORT = 5000;
+app.use("/api/auth", authRoutes);
 
 // Fashion blog posts
 const fashionPosts = [
@@ -615,6 +618,9 @@ app.delete("/api/lifestyle/:id", (req, res) => {
     }
 });
 
+
+// PORT
+const PORT = 5000;
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 });
