@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const fs = require('fs-extra');
 const bodyParser = require('body-parser')
@@ -10,6 +11,7 @@ const cors = require('cors');
 const { url } = require('inspector');
 const { lifestyle } = require('./Controllers/blogsControllers');
 
+
 app.use(express.json());
 app.use("/api/auth/signup", authRoutes);
 
@@ -19,7 +21,7 @@ app.use("/api/auth/login", authRoutes);
 app.use(express.json());
 app.use("/api/lifestyle/:id", blogsRoutes);
 app.use("/api/beauty/:id", blogsRoutes);
-app.use("api/beauty/:id", blogsRoutes);
+app.use("/api/beauty/:id", blogsRoutes);
 
 // Middleware
 // CORS configuration with credentials
@@ -422,7 +424,7 @@ app.get("/api/beauty", (req, res) => {
 });
 
 // Route for all lifestyle posts
-app.get("/api/posts/lifestyle", (req, res) => {
+app.get("/api/lifestyle", (req, res) => {
     res.json(lifestylePosts);
 });
 
@@ -439,7 +441,7 @@ app.get("/api/beauty/:id", (req, res) => {
     res.json(post);
 });
 
-app.get("./api/lifestyle/:id", (req, res) => {
+app.get("/api/lifestyle/:id", (req, res) => {
     const postId = parseInt(req.params.id);
     const post = lifestylePosts.find((p) => p.id === postId);
     res.json(post);
@@ -577,7 +579,8 @@ app.post("/api/auth/signup", async (req, res) => {
 
 
 // PORT
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 });

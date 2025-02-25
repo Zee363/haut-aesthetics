@@ -1,6 +1,5 @@
 const fs = require('fs-extra');
 const path = require("path");
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const error  = require('console');
 
@@ -12,14 +11,14 @@ exports.signup = async (req, res) => {
 
         await fs.ensureDir(userDir);
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-        return hashedPassword;
+        const Password = await (password, 10);
+        return Password;
 
         const newUser = {
             id: Date.now().toString(),
             fullname,
             email,
-            password: hashedPassword
+            Password
         };
 
         const userFile = path.join(userDir, `${newUser.id}.json`);
@@ -45,7 +44,7 @@ exports.login = async (req, res) => {
         }
 
         const userData = await fs.readJson(path.join(userDir, user));
-        const isPasswordValid = await bcrypt.compare(password, userData.password);
+        const isPasswordValid = password === userData.Password;
 
         if (!isPasswordValid) {
             return res.status(401).json({ message: "Invalid password." });
