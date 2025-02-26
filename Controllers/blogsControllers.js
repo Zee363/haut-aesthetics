@@ -1,21 +1,4 @@
-// Lifestyle posts   
-       exports.getlifestylePostsById = (req, res) => {
-        const { id } = req.params; // Get the post ID from the URL params
-      
-        // Find the post by ID
-        const lifestylePost = lifestylePosts.find(post => post.id === id);
-      
-        // If the post is not found, return a 404 error
-        if (!lifestylePost) {
-          return res.status(404).json({ message: 'Lifestyle post not found' });
-        }
-      
-        // If the post is found, return it as the response
-        return res.status(200).json(lifestylePost);
-      };
-
-
-      // Beauty posts
+// Beauty posts
       exports.getbeautyPostsById = (req, res) => {
         const { id } = req.params; // Get the post ID from the URL params
       
@@ -32,6 +15,22 @@
       };
 
 
+        // Lifestyle posts   
+        exports.getlifestylePostsById = (req, res) => {
+          const { id } = req.params; // Get the post ID from the URL params
+        
+          // Find the post by ID
+          const lifestylePost = lifestylePost.find(post => post.id === id);
+        
+          // If the post is not found, return a 404 error
+          if (!lifestylePost) {
+            return res.status(404).json({ message: 'Lifestyle post not found' });
+          }
+        
+          // If the post is found, return it as the response
+          return res.status(200).json(lifestylePost);
+        };
+
 // Fashion posts      
       exports.getfashionPostsById = (req, res) => {
         const { id } = req.params; // Get the post ID from the URL params
@@ -47,6 +46,7 @@
         // If the post is found, return it as the response
         return res.status(200).json(fashionPost);
       };
+
 
 
  // Creating a new post     

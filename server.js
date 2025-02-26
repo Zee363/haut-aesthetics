@@ -73,14 +73,9 @@ const fashionPosts = [
               {
                 subTitle: "Look 2",
               },
-              {
-                subTitle: "Look 3",
-                paragraphs:
-                  "Thank you so much to the team at Fig & Honey for this amazing collab!"
-              },
               
             ],
-            images: ["/", "/", "/", "/", "/"],
+            images: ["/style1.1.1.webp", "/style1.1.2.webp", "/style.1.1.3.webp", "/style1.1.4.webp", "/style1.1.5.webp", "/style1.1.6.webp", "/style1.1.7.webp", "/style1.1.8.webp"],
           },
     
       {
@@ -112,7 +107,7 @@ const fashionPosts = [
              }
               
             ],
-            images: ["/", "/", "/", "/", "/"],
+            images: ["/style1.2.1.webp", "/style1.2.2.webp", "/style1.2.3.webp", "/style1.2.4.webp", "/style1.2.5.webp", "/style1.2.6.webp", "/style1.2.7.webp"],
           },
     
       {
@@ -131,7 +126,7 @@ const fashionPosts = [
                  ],
                 },
             ],
-            images: ["/", "/", "/", "/", "/"],
+            images: ["/style1.3.1.webp", "/style1.3.2.webp", "/style1.3.3.webp", "/style1.3.4.webp", "/style1.3.5.webp", "/style1.3.6.webp", "/style1.3.7.webp"],
           },
     
       {
@@ -159,7 +154,7 @@ const fashionPosts = [
                   paragraph: "You can check out more pieces on their social media platforms, follow “@gleethrifting”."
                 },
             ],
-            images: ["/", "/", "/", "/", "/"],
+            images: ["/style1.4.1.webp", "/style1.4.2.webp", "/style1.4.3.webp", "/style1.4.4.webp", "/style1.4.5.webp", "/style1.4.6.webp", "/style1.4.7.webp", "/style1.4.8.webp"],
           },
         ]
 
@@ -178,7 +173,7 @@ const fashionPosts = [
               "Instant Hydrating cream which has left my skin so smooth and hydrated since introducing it to my routine. Looking forward to more days of using it and seeing even more amazing results.",
               "Head over to Kind Vegan Skincare to shop.",
             ],
-            images: ["/", "/", "/", "/", "/"],
+            images: ["/skincare1.5.1.webp", "/skincare1.5.2.webp", "/skincare1.5.3.webp", "/skincare1.5.4.webp"],
           },
     
       {
@@ -213,7 +208,7 @@ const fashionPosts = [
               },
               "Skin Creamery's products all have such great formulation of ingredients that truly work and have been effective on my skin. The products are gentle and super soothing. It truly is an experience you get when using the products.",
             ],
-            images: ["/"],
+            images: ["/skincare1.6.1.webp", "/skincare1.6.2.webp"],
           },
     
           {
@@ -241,7 +236,7 @@ const fashionPosts = [
                   "Squalane is super hydrating and calming on the skin. It improves skin elasticity and is known to help in reducing the appearance of fine lines and wrinkles. It balances oil production, providing just enough moisture to keep the skin clear and healthy.",
               },
             ],
-            images: ["/", "/", "/", "/"],
+            images: ["/skincare1.7.1.webp", "/skincare1.7.2.webp", "/skincare1.7.3.webp", "/skincare1.7.4.webp"],
         },
     
       {
@@ -280,7 +275,7 @@ const fashionPosts = [
               },
               "Keep an eye out for more posts featuring these amazing products from Skin Creamery. Visit my social platforms to see more visuals.",
             ],
-            images: ["/"],
+            images: ["/skincare1.8.1.webp"],
           },
      ]
     
@@ -305,16 +300,16 @@ const fashionPosts = [
             pageTitle: "Lifestyle",
             category: "Personal",
             title: "The Words You Speak Become The House You Live In",
-            paragraphs: [
-              "How strange is it? You know yourself more than anyone else, yet you crumble at the words or actions of someone who has not lived a single second of your life. The world is filled with people who think they know you but realizing that no one else's voice but yours and the one who created you matters.",
-              "I felt so inspired to put this post together because since entering my 26th year I have come to realize so much about myself and the people around me. There's a bible verse that reads:",
-              "Don't let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity. -1 Timothy 4:12",
-              "Reading this verse you learn that Paul's advice to Timothy is do not give others pause to think that you being young is a reason to believe you are anything but trustworthy, godly, and responsible. Basically, represent yourself so well that they don’t even have time to think about your age but respect your maturity in the Lord which I love. I resonate so well with this verse in many ways but reflecting in it all from how I conduct myself, how both purely joyful and fantastic existing relationships (and the failed ones) I learn to move in life with so many love for myself and others. When you go into any situation with pure intention and it is not received you learn that the grass is not always greener on the other side. Focusing on your side of the lawn and watering your own BUT watering those who appreciate allows for your energy to refocus on the blessings around you.",
-              "I referenced this verse in particular because you also start understanding how personal your relationship is with Christ (your faith) and focusing on the journey together. Be an example to those who truly see the light within you and stop focusing on what does not nurture you. Simple. God is strategic, so great and consistent and will always set the tone so you better understand situations you find yourself in. Remember he is the ultimate love.",
-              "I hope somewhere, somehow reading this short post resonates with you to refocus from certain situations and rather focus on you and the blessings your creator continues to give you.",
-              "Sending love and light for anyone going through a season of finding their silver lining! YOU GOT THIS!",
+               paragraphs: [
+                 "How strange is it? You know yourself more than anyone else, yet you crumble at the words or actions of someone who has not lived a single second of your life. The world is filled with people who think they know you but realizing that no one else's voice but yours and the one who created you matters.",
+                 "I felt so inspired to put this post together because since entering my 26th year I have come to realize so much about myself and the people around me. There's a bible verse that reads:",
+                 "Don't let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity. -1 Timothy 4:12",
+                 "Reading this verse you learn that Paul's advice to Timothy is do not give others pause to think that you being young is a reason to believe you are anything but trustworthy, godly, and responsible. Basically, represent yourself so well that they don’t even have time to think about your age but respect your maturity in the Lord which I love. I resonate so well with this verse in many ways but reflecting in it all from how I conduct myself, how both purely joyful and fantastic existing relationships (and the failed ones) I learn to move in life with so many love for myself and others. When you go into any situation with pure intention and it is not received you learn that the grass is not always greener on the other side. Focusing on your side of the lawn and watering your own BUT watering those who appreciate allows for your energy to refocus on the blessings around you.",
+                 "I referenced this verse in particular because you also start understanding how personal your relationship is with Christ (your faith) and focusing on the journey together. Be an example to those who truly see the light within you and stop focusing on what does not nurture you. Simple. God is strategic, so great and consistent and will always set the tone so you better understand situations you find yourself in. Remember he is the ultimate love.",
+                 "I hope somewhere, somehow reading this short post resonates with you to refocus from certain situations and rather focus on you and the blessings your creator continues to give you.",
+                 "Sending love and light for anyone going through a season of finding their silver lining! YOU GOT THIS!",
             ],
-            images: ["/", "/", "/", "/"],
+               images: ["/", "/", "/", "/"],
           },
     
           {
@@ -322,16 +317,16 @@ const fashionPosts = [
             pageTitle: "Lifestyle",
             category: "Personal",
             title: "Journey of Connection & Wellness",
-            paragraphs: [
-              "If you have been following me for a while now, you would know that I’ve been an ambassador for female wellness brand Kiko Vitals for a while now. I’ve shared my journey across my social platforms and on my website as well. For the month of February the brand has asked me to share “5 Reasons Why I’m buying Kiko Vitals this Valentine’s” and I immediately thought about my journey using the Debloat and Gut Glow supplements.",
-              "As someone who struggles with IBS related issues I need to make sure that my gut is happy and us tummy troubled girlies know if our guts are happy, so are we. So best believe, I’m not skipping on my Kiko Vitals Debloat and Gut Glow supplements.",
-              "To me, having a holistic approach to my overall wellbeing and self-love is of top priority and knowing that a brand like Kiko Vitals is dedicated to restoring physical wellbeing and nurturing the inner being makes me have immense admiration for the brand.",
-              "The supplements have great ingredients including Peppermint, Ginger Root, Dandelion Root and more making it effective ensuring it works. For me, prioritizing my self-care is key and with a powerhouse product like the Debloat and Gut Glow from Kiko Vitals, I know I can always feel my best. The Debloat and Gut Glow has not only helped with my symptoms but enhanced my overall well-being making it the perfect Valentine’s day gift to me, from me.",
-              "Investing in our female wellness is a sign of self-love and empowerment. So spoil yourself this Valentines with products from KikoVitals. The female wellness brand known to do it best.",
-              "To purchase any of the brands available products visit: http://www.kikovitals.com and you can use my code “AYANDA10” for a 10% savings at checkout.",
-              "To see more content and video footage of me sharing more on my journey you can check out my Instagram page.",
+               paragraphs: [
+                 "If you have been following me for a while now, you would know that I’ve been an ambassador for female wellness brand Kiko Vitals for a while now. I’ve shared my journey across my social platforms and on my website as well. For the month of February the brand has asked me to share “5 Reasons Why I’m buying Kiko Vitals this Valentine’s” and I immediately thought about my journey using the Debloat and Gut Glow supplements.",
+                 "As someone who struggles with IBS related issues I need to make sure that my gut is happy and us tummy troubled girlies know if our guts are happy, so are we. So best believe, I’m not skipping on my Kiko Vitals Debloat and Gut Glow supplements.",
+                 "To me, having a holistic approach to my overall wellbeing and self-love is of top priority and knowing that a brand like Kiko Vitals is dedicated to restoring physical wellbeing and nurturing the inner being makes me have immense admiration for the brand.",
+                 "The supplements have great ingredients including Peppermint, Ginger Root, Dandelion Root and more making it effective ensuring it works. For me, prioritizing my self-care is key and with a powerhouse product like the Debloat and Gut Glow from Kiko Vitals, I know I can always feel my best. The Debloat and Gut Glow has not only helped with my symptoms but enhanced my overall well-being making it the perfect Valentine’s day gift to me, from me.",
+                 "Investing in our female wellness is a sign of self-love and empowerment. So spoil yourself this Valentines with products from KikoVitals. The female wellness brand known to do it best.",
+                 "To purchase any of the brands available products visit: http://www.kikovitals.com and you can use my code “AYANDA10” for a 10% savings at checkout.",
+                 "To see more content and video footage of me sharing more on my journey you can check out my Instagram page.",
             ],
-            images: ["/", "/", "/", "/"],
+               images: ["/", "/", "/", "/"],
           },
 
           {
@@ -339,74 +334,74 @@ const fashionPosts = [
             pageTitle: "Lifestyle",
             category: "Personal",
             title: "Haut Q&A",
-            paragraph: [
-            "Hey Friends! Okay, this was meant to be live a long time ago (don’t come for me, thanks) but it’s finally here. I shared over on my social platforms that I would be doing another [Read Here: Blogger Tag - Get to Know Me] I enjoy these because I get to be in touch with everyone who engages with my content. Join me as I share some Q&As from you to me.",
-            {
-              subTitle: "Where are you based?",
-              content: "I am based in Johannesburg, South Africa.",
-            },
-            {
-              subTitle: "What is your zodiac sign?",
-              content: "Pisces.",
-            },
-            {
-              subTitle: "How would you describe your fashion sense?",
-              content: "Minimal, chic and easy. I love a soft and simple approach to style.",
-            },
-            {
-              subTitle: "What kind of music do you like?",
-              content: "I’m very diverse when it comes to music. I love neo-soul, I enjoy vibing out to some hip hop, we can throw in some classical, gospel or even deep house.",
-            },
-            {
-              subTitle: "What are your top 3 favourite songs right now? Also include 3 all time favourite albums.",
-              content: "Okay, you had me here. My current favourite songs are Adele – My Little Love, Ari Lennox – Mean Mug and Bas – Matches. When it comes down to my favourite albums of all time: Kendrick Lamar – To Pimp A Butterfly, 2015 (I appreciate the beats and lyrics on here), Corinne Bailey Rae – The Sea, 2010 (really enjoying this one. It was one of my first albums my mom got me) and Isaiah Rashad – The House Is Burning, 2021 (for the vibes).",
-            },
-            {
-              subTitle: "What do you do? Career wise.",
-              content: "I am a Digital Marketer currently working for a creative agency based in Johannesburg. I am also a creative consultant and I also make a living through my website with brands as a Blogger. I also do some creative consulting with some projects and collabs.",
-            },
-            {
-              subTitle: "Your career path and what led you to what you’re doing today?",
-              content: "I’ve always known that I want to work in fashion and creative spaces for as long as I can remember. Growing up I’ve always wanted to be a Fashion Designer (still my biggest dream). And I got exposed to the industry even more. I got to engage with all aspects of it from both a practical and theory part. I slowly did fashion styling, gradually moving towards being a blogger and learning about the digital world. Eventually it all just started making sense to where I am now. I still have so many things that I want to achieve within my career but to date I’m living my dream.",
-            },
-            {
-              subTitle: "What do you love about social media? And, how has it changed since you began your career?",
-              content: "I jumped onto social media platforms very early on, creating for upcoming clothing brands and also content creating for other individuals. When I started being more intentional about growing Haut I got even more comfortable creating my own content. It had a whole new purpose — a new outlet for me to grow and express my creative thoughts and share what I love. I would have always found a way to slot myself within the industry, but social media gave a voice to those who were starting out and not afraid which I’ve always appreciated about it. I also have such a great community of supporters on there.",
-            },
-            {
-              subTitle: "How has your style and aesthetic evolved?",
-              content: "I think I have always stuck to my rule of ‘less is more’. I may lean towards different tones and shapes depending on the year, season or trend, but ultimately I go back to a real simple aesthetic. I’m such a minimalist at heart and I love the calm it gives me."
-            },
-            {
-              subTitle: "Tips for someone who wants to do Digital Marketing?",
-              content: "Listen, I am no expert in the field. From my experience it’s been a learning, unlearning experience. The best advice I can give is to work hard. Research, network and create. I am currently studying so that I’m able to understand even better so do whatever you can to learn and grow in what you’re doing. Did I mention create? What helped me most was designing and learning about the different softwares available. Educating myself on all things marketing and even understanding clients and how businesses function off from marketing. You really learn so much once you commit and dedicate to the course of it all.",
-            },
-            {
-              subTitle: "Do you plan your content? What do you use to take your pictures.",
-              content: "Brand work I do love to plan around. I enjoy creating a moodboard around the brand brief and create content around it. For my own work I just love allowing things to flow especially when it’s just an outfit of the day look it’s a simple snap and share.",
-            },
-            {
-              subTitle: "Love your aesthetic. How do you stay disciplined to it?",
-              content: "Thank you! I get asked this all the time. I am living my aesthetic to be honest. I sometimes find that it randomly catches up to me, if that makes sense. It comes naturally and I just have a flow to it. I don’t like overthinking it, so I just allow myself to freely do what I want when it comes to it and when I do pay attention it’s consistent.",
-            },
-            {
-              subTitle: "How do you pronounce your brand name?",
-              content: "It’s pronounced ‘hawt’.",
-            },
-            {
-              subTitle: "What editing apps do you use?",
-              content: "I often use Snapseed. I sometimes use VSCO Cam and for brand work I use Adobe and Lightroom.",
-            },
-            {
-              subTitle: "Love your book shares. Who is your favourite author?",
-              content: "I can’t really pick just one but I absolutely love Hanya Yanagihara and of course my ultimate favourite Jay Shetty. I always revert back to Think Like A Monk and looking forward to getting his latest release.",
-            },
-            {
-            paragraph: "A huge thank you to everyone who engaged. I haven’t included all the questions since I want to do a two-part series. Thank you for stopping by.",
-            },
-            {
-            images: ["/", "/", "/", "/"],
-            },
+              paragraphs: [
+                 "Hey Friends! Okay, this was meant to be live a long time ago (don’t come for me, thanks) but it’s finally here. I shared over on my social platforms that I would be doing another [Read Here: Blogger Tag - Get to Know Me] I enjoy these because I get to be in touch with everyone who engages with my content. Join me as I share some Q&As from you to me.",
+              {
+                subTitle: "Where are you based?",
+                content: "I am based in Johannesburg, South Africa.",
+              },
+              {
+                subTitle: "What is your zodiac sign?",
+                content: "Pisces.",
+              },
+              {
+                subTitle: "How would you describe your fashion sense?",
+                content: "Minimal, chic and easy. I love a soft and simple approach to style.",
+              },
+              {
+                subTitle: "What kind of music do you like?",
+                content: "I’m very diverse when it comes to music. I love neo-soul, I enjoy vibing out to some hip hop, we can throw in some classical, gospel or even deep house.",
+              },
+              {
+                subTitle: "What are your top 3 favourite songs right now? Also include 3 all time favourite albums.",
+                content: "Okay, you had me here. My current favourite songs are Adele – My Little Love, Ari Lennox – Mean Mug and Bas – Matches. When it comes down to my favourite albums of all time: Kendrick Lamar – To Pimp A Butterfly, 2015 (I appreciate the beats and lyrics on here), Corinne Bailey Rae – The Sea, 2010 (really enjoying this one. It was one of my first albums my mom got me) and Isaiah Rashad – The House Is Burning, 2021 (for the vibes).",
+              },
+              {
+                subTitle: "What do you do? Career wise.",
+                content: "I am a Digital Marketer currently working for a creative agency based in Johannesburg. I am also a creative consultant and I also make a living through my website with brands as a Blogger. I also do some creative consulting with some projects and collabs.",
+              },
+              {
+                subTitle: "Your career path and what led you to what you’re doing today?",
+                content: "I’ve always known that I want to work in fashion and creative spaces for as long as I can remember. Growing up I’ve always wanted to be a Fashion Designer (still my biggest dream). And I got exposed to the industry even more. I got to engage with all aspects of it from both a practical and theory part. I slowly did fashion styling, gradually moving towards being a blogger and learning about the digital world. Eventually it all just started making sense to where I am now. I still have so many things that I want to achieve within my career but to date I’m living my dream.",
+              },
+              {
+                subTitle: "What do you love about social media? And, how has it changed since you began your career?",
+                content: "I jumped onto social media platforms very early on, creating for upcoming clothing brands and also content creating for other individuals. When I started being more intentional about growing Haut I got even more comfortable creating my own content. It had a whole new purpose — a new outlet for me to grow and express my creative thoughts and share what I love. I would have always found a way to slot myself within the industry, but social media gave a voice to those who were starting out and not afraid which I’ve always appreciated about it. I also have such a great community of supporters on there.",
+              },
+              {
+                subTitle: "How has your style and aesthetic evolved?",
+                content: "I think I have always stuck to my rule of ‘less is more’. I may lean towards different tones and shapes depending on the year, season or trend, but ultimately I go back to a real simple aesthetic. I’m such a minimalist at heart and I love the calm it gives me."
+              },
+              {
+                subTitle: "Tips for someone who wants to do Digital Marketing?",
+                content: "Listen, I am no expert in the field. From my experience it’s been a learning, unlearning experience. The best advice I can give is to work hard. Research, network and create. I am currently studying so that I’m able to understand even better so do whatever you can to learn and grow in what you’re doing. Did I mention create? What helped me most was designing and learning about the different softwares available. Educating myself on all things marketing and even understanding clients and how businesses function off from marketing. You really learn so much once you commit and dedicate to the course of it all.",
+              },
+              {
+                subTitle: "Do you plan your content? What do you use to take your pictures.",
+                content: "Brand work I do love to plan around. I enjoy creating a moodboard around the brand brief and create content around it. For my own work I just love allowing things to flow especially when it’s just an outfit of the day look it’s a simple snap and share.",
+              },
+              {
+                subTitle: "Love your aesthetic. How do you stay disciplined to it?",
+                content: "Thank you! I get asked this all the time. I am living my aesthetic to be honest. I sometimes find that it randomly catches up to me, if that makes sense. It comes naturally and I just have a flow to it. I don’t like overthinking it, so I just allow myself to freely do what I want when it comes to it and when I do pay attention it’s consistent.",
+              },
+              {
+                subTitle: "How do you pronounce your brand name?",
+                content: "It’s pronounced ‘hawt’.",
+              },
+              {
+                subTitle: "What editing apps do you use?",
+                content: "I often use Snapseed. I sometimes use VSCO Cam and for brand work I use Adobe and Lightroom.",
+              },
+              {
+                subTitle: "Love your book shares. Who is your favourite author?",
+                content: "I can’t really pick just one but I absolutely love Hanya Yanagihara and of course my ultimate favourite Jay Shetty. I always revert back to Think Like A Monk and looking forward to getting his latest release.",
+              },
+              {
+              paragraph: "A huge thank you to everyone who engaged. I haven’t included all the questions since I want to do a two-part series. Thank you for stopping by.",
+              },
+              {
+              images: ["/", "/", "/", "/"],
+              },
           ],
         },
     ]
