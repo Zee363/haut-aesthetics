@@ -1,35 +1,22 @@
 const fs = require('fs-extra');
-const mysql = require('mysql2/promise');
 const path = require("path");
 const jwt = require('jsonwebtoken');
 const error  = require('console');
-const db = require('../db');
 
 const userDir = path.join( __dirname, "../data/user");
 
 exports.signup = async (req, res) => {
     try {
-        const {fullName, email, password} = req.body;
+        const{fullname, email, password} = req.body;
 
-        const connection = await mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            database: 'AESTHETICS'
-        });
-            
         await fs.ensureDir(userDir);
 
         const Password = await (password, 10);
-
-        const [result] = await connection.execute(
-            'INSERT INTO Users (fullName, email, password) VALUES (?, ?, ?)', [fullname, email, password]
-        );
-
-        await connection.end();
+        return Password;
 
         const newUser = {
-            id: result.insertId,
-            fullName,
+            id: Date.now().toString(),
+            fullname,
             email,
             Password
         };
@@ -46,16 +33,6 @@ exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
         const userFiles = await fs.readdir(userDir);
-
-        const connection = await mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            database: 'AESTHETICS'
-        });
-
-        const [rows] = await connection.execute('SELECT * FROM Users WHERE email = ?', [email]);
-
-        await connection.end();
 
         const user = userFiles.find(async (file) => {
             const data = await fs.readJson(path.join(userDir, file));
