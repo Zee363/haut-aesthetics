@@ -1,58 +1,44 @@
-const fs = require('fs-extra');
-const path = require("path");
+const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const error  = require('console');
 
-const userDir = path.join( __dirname, "../data/user");
 
 exports.signup = async (req, res) => {
     try {
-        const{fullname, email, password} = req.body;
+        const{ fullname, email, password } = req.body;
 
-        await fs.ensureDir(userDir);
+        const hashedPassword = await bcrypt.hash(password, 10);
+        
 
-        const Password = await (password, 10);
-        return Password;
-
-        const newUser = {
-            id: Date.now().toString(),
-            fullname,
-            email,
-            Password
-        };
-
-        const userFile = path.join(userDir, `${newUser.id}.json`);
-        await fs.writeJson(userFile, newUser);
-        res.status(201).json({ message: "User registered successfully", user: newUser });
+      const result = await pool.query('INSERT INTO Users(fullname, email, password) VALUES(?, ?, ?)', [fullname, email, hashedPassword]);
+        res.status(201).json({ message: "User registered succssfully", userId: result.insertId });
     } catch (error) {
-        res.status(500).json({message: "Error signing up user.", error: error.message })
+        res.status(500).json({ message: "Error signing up user.", error: error.message });
     }
-}
+};
+
 
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const userFiles = await fs.readdir(userDir);
 
-        const user = userFiles.find(async (file) => {
-            const data = await fs.readJson(path.join(userDir, file));
-            return data.email === email;
-        });
+       const [rows] = await pool.query('SELECT * FROM Users WHERE email = ?', [email]);
+       const user = rows[0];
 
         if (!user) {
             return res.status(404).json({ message: "User not found." });
         }
+       
+        const isPasswordValid = await bcrypt.compare(password, user.password);
 
-        const userData = await fs.readJson(path.join(userDir, user));
-        const isPasswordValid = password === userData.Password;
+            if (!isPasswordValid) {
+                return res.status(401).json({ message: "Invalid password." });
+            }
 
-        if (!isPasswordValid) {
-            return res.status(401).json({ message: "Invalid password." });
-        }
 
-        const token = jwt.sign({ email: userData.email }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET_KEY, { expiresIn: "1h" });
         res.status(200).json({ message: "User logged in successfully.", token });
     } catch (error) {
         res.status(500).json({ message: "Error logging in user.", error: error.message });
     }
-}
+};

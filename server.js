@@ -8,8 +8,8 @@ const blogsRoutes = require("./routes/blogsRoutes");
 const path = require('path');
 const app= express();
 const cors = require('cors');
-const { url } = require('inspector');
-const { lifestyle } = require('./Controllers/blogsControllers');
+const mysql = require('mysql2');
+const posts = [];
 
 
 app.use(express.json());
@@ -22,6 +22,7 @@ app.use(express.json());
 app.use("/api/lifestyle/:id", blogsRoutes);
 app.use("/api/beauty/:id", blogsRoutes);
 app.use("/api/beauty/:id", blogsRoutes);
+app.use("/api/newpost/", blogsRoutes);
 
 // Middleware
 // CORS configuration with credentials
@@ -37,18 +38,58 @@ app.use(cors({
     origin: 'http://localhost:3000'
 }));
 
-app.get('/api/lifestyle/:id', (req, res) => {
-    const { id } = req.params;
-    res.send(lifestylePosts);
+// Connect to the database
+const db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "haut_aesthetics_1"
   });
 
+  app.set('db', db);
+
+  db.connect(function(err) {
+    if (err) throw err;
+    console.log("Database Connected!");
+  });
 
 app.use(bodyParser.json());
 
+// Get data from the database
+app.post('/api/auth/signup', (req, res) => {
+    const sql=  'INSERT INTO users(fullname, email, password) VALUES(?)';
+    const values = [req.body.fullname, req.body.email, req.body.password];
+    db.query(sql, [values], (err, data) => {
+      if (err) return res.json(err);
+      return res.json({
+        id: data.insertId,
+        fullname: values.fullname,
+        email: values.email,
+        password: values.password,
+        message: 'User added successfully!!!',
+      });
+    })
+});
+
 app.post("/api/auth/signup", async (req, res) => {
-    console.log('Signup request received:', req.body); 
-    res.status(201).json({ message: 'User created successfully' });
-    });
+  const sql = 'SELECT * FROM users WHERE email = ?';
+  const values = [req.body.email];
+  db.query(sql, [values], (err, data) => {
+    if (err) return res.status(500).json(err);
+    if (data.length === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    return res.status(200).json({
+      message: 'User found successfully',
+      user: {
+        email: user.email,
+        password: user.password,
+      }
+      }
+    );
+    db.end();
+  });
+});
 
 app.post("/api/auth/login", async (req, res) => {
     console.log('Login request received:', req.body);
@@ -68,11 +109,8 @@ const fashionPosts = [
               "Styling these pants reminded me of how much one can get so much wear out of a timeless, classic piece. I will definitely be wearing these often for more occasions and WFH days. Plus black goes with everything and fits in perfect with my minimal wardrobe.",
               "Join me as I share and edit of how I’ve been styling them for a coffee date, errands, and meetings.",
               {
-                subTitle: "Look 1",
-              },
-              {
-                subTitle: "Look 2",
-              },
+                subTitle: "The Looks",
+              }
               
             ],
             images: ["/style1.1.1.webp", "/style1.1.2.webp", "/style.1.1.3.webp", "/style1.1.4.webp", "/style1.1.5.webp", "/style1.1.6.webp", "/style1.1.7.webp", "/style1.1.8.webp"],
@@ -292,7 +330,7 @@ const fashionPosts = [
         "Here's to 26! I'm still here, not because I'm great or because I deserve to be here, but because God is not done with me. Luke 2:52 🤍 prayer - wholistic growth in wisdom, statue and increase in favour with God.",
         "Sending you all love & light.",
       ],
-      images: ["./personal2.1.webp", "./personla2.2.webp", "./personal2.3.webp", "./personl2.4.webp"],
+      images: ["/personal1.9.1.jpg", "/personAl1.9.2.jpg"],
     },
     
           {
@@ -309,7 +347,7 @@ const fashionPosts = [
                  "I hope somewhere, somehow reading this short post resonates with you to refocus from certain situations and rather focus on you and the blessings your creator continues to give you.",
                  "Sending love and light for anyone going through a season of finding their silver lining! YOU GOT THIS!",
             ],
-               images: ["/", "/", "/", "/"],
+               images: ["/personal2.1.webp", "/personal2.2.webp", "/personal2.3.webp"],
           },
     
           {
@@ -326,7 +364,7 @@ const fashionPosts = [
                  "To purchase any of the brands available products visit: http://www.kikovitals.com and you can use my code “AYANDA10” for a 10% savings at checkout.",
                  "To see more content and video footage of me sharing more on my journey you can check out my Instagram page.",
             ],
-               images: ["/", "/", "/", "/"],
+               images: ["/personal3.1.webp"],
           },
 
           {
@@ -399,10 +437,9 @@ const fashionPosts = [
               {
               paragraph: "A huge thank you to everyone who engaged. I haven’t included all the questions since I want to do a two-part series. Thank you for stopping by.",
               },
-              {
-              images: ["/", "/", "/", "/"],
-              },
-          ],
+            ],
+              images: ["/personal4.1.webp"],
+
         },
     ]
 
@@ -410,7 +447,7 @@ const fashionPosts = [
 // Route for all GET requests
 // Route for all fashion posts
 app.get("/api/fashion", (req, res) => {
-    res.json(fashionPosts);
+  res.json(fashionPosts);  
 });
 
 // Route for all beauty posts
@@ -424,154 +461,199 @@ app.get("/api/lifestyle", (req, res) => {
 });
 
 // Route for all  GET posts via IDs
-app.get("/api/fashion/:id", (req, res) => {
+app.get("/api/fashion/:id", async (req, res) => {
     const postId = parseInt(req.params.id);
     const post = fashionPosts.find((p) => p.id === postId);
     res.json(post);
 });
 
-app.get("/api/beauty/:id", (req, res) => {      
+app.get("/api/beauty/:id", async (req, res) => {      
     const postId = parseInt(req.params.id);
     const post = beautyPosts.find((p) => p.id === postId);
     res.json(post);
 });
 
-app.get("/api/lifestyle/:id", (req, res) => {
+app.get("/api/lifestyle/:id", async (req, res) => {
     const postId = parseInt(req.params.id);
     const post = lifestylePosts.find((p) => p.id === postId);
     res.json(post);
-})
-
-// Route to all POST requests
-// APIs for creating blog posts for all pages
-app.post("/api/fashion", (req, res) => {
-    const newPost = createNewPost(fashionPosts, req);
-    res.status(201).json(newPost);
 });
 
-app.post("/api/beauty", (req, res) => {
-    const newPost = createNewPost(beautyPosts, req);
-    res.status(201).json(newPost);
+// Routes to add posts to database
+app.post("/api/beauty/", (req, res) => {
+  const db = req.app.get("db"); // Assuming you're using req.app to get the database
+  
+  const { pageTitle, category, title, paragraphs, images } = req.body;
+
+  if (!title) {
+    return res.status(400).json({ message: "Title is required" });
+  }
+
+  const paragraphsJSON = JSON.stringify(paragraphs);
+  const imagesJSON = JSON.stringify(images);
+
+  try {
+    const sql = `INSERT INTO posts( pageTitle, category, title, paragraphs, images) VALUES (?, ?, ?, ?, ?)`;
+    const values = [pageTitle, category, title, paragraphsJSON, imagesJSON];
+
+    // Execute the query
+    db.query(sql, values, (err, result) => {
+      if (err) {
+        console.error("Error inserting post:", err); // Log error for debugging
+        res.status(500).json({ message: "Internal server error" });
+      } else {
+        console.log("Post created successfully:", result); // Log result for debugging
+        res.status(201).json({ message: "Post created successfully", postId: result.insertId });
+      }
+    });
+  } catch (error) {
+    console.error("Error:", error); // Log error for debugging
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
-app.post("/api/lifestyle", (req, res) => {
-    const newPost = createNewPost(lifestylePosts, req);
-    res.status(201).json(newPost);
+app.post("/api/fashion/", (req, res) => {
+  const db = req.app.get("db"); // Assuming you're using req.app to get the database
+  
+  const { pageTitle, category, title, paragraphs, images } = req.body;
+
+  if (!title) {
+    return res.status(400).json({ message: "Title is required" });
+  }
+
+  const paragraphsJSON = JSON.stringify(paragraphs);
+  const imagesJSON = JSON.stringify(images);
+
+  try {
+    const sql = `INSERT INTO posts( pageTitle, category, title, paragraphs, images) VALUES (?, ?, ?, ?, ?)`;
+    const values = [pageTitle, category, title, paragraphsJSON, imagesJSON];
+
+    // Execute the query
+    db.query(sql, values, (err, result) => {
+      if (err) {
+        console.error("Error inserting post:", err); // Log error for debugging
+        res.status(500).json({ message: "Internal server error" });
+      } else {
+        console.log("Post created successfully:", result); // Log result for debugging
+        res.status(201).json({ message: "Post created successfully", postId: result.insertId });
+      }
+    });
+  } catch (error) {
+    console.error("Error:", error); // Log error for debugging
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
+// Route for creating lifestyle posts
+app.post("/api/lifestyle/", (req, res) => {
+  const db = req.app.get("db"); // Assuming you're using req.app to get the database
+  
+  const { pageTitle, category, title, paragraphs, images } = req.body;
 
-// Route to editing post accross all pages using IDs
-// Route for editing fashion posts via ID
-app.put("/api/fashion/:id", (req, res) => {
-    const postId = parseInt(req.params.id);
-    const post = fashionPosts.find((p) => p.id === postId);
+  if (!title) {
+    return res.status(400).json({ message: "Title is required" });
+  }
 
-    console.log("Before update:", post);  
+  const paragraphsJSON = JSON.stringify(paragraphs);
+  const imagesJSON = JSON.stringify(images);
 
-    if (post) {
-        post.pageTitle = req.body.pageTitle || post.pageTitle;
-        post.category = req.body.category || post.category;
-        post.title = req.body.title || post.title;
-        post.subTitle = req.body.subTitle || post.subTitle;
-        post.paragraphs = req.body.content || post.paragraphs;
+  try {
+    const sql = `INSERT INTO posts( pageTitle, category, title, paragraphs, images) VALUES (?, ?, ?, ?, ?)`;
+    const values = [pageTitle, category, title, paragraphsJSON, imagesJSON];
 
-        console.log("After update:", post);
-        res.json(post);
-    } else {
-        res.status(404).json({ message: "Post not found."});
+    // Execute the query
+    db.query(sql, values, (err, result) => {
+      if (err) {
+        console.error("Error inserting post:", err); // Log error for debugging
+        res.status(500).json({ message: "Internal server error" });
+      } else {
+        console.log("Post created successfully:", result); // Log result for debugging
+        res.status(201).json({ message: "Post created successfully", postId: result.insertId });
+      }
+    });
+  } catch (error) {
+    console.error("Error:", error); // Log error for debugging
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.get('/api/newpost/', (req, res) => {
+  const sql = 'SELECT * FROM new_posts';
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error getting posts:', err);
+      res.status(500).json({ message: 'Error getting posts' });
+    } 
+      res.json(result);
+    });
+  });
+
+// Routes for creating blog posts for all pages
+app.post("/api/newpost/", (req, res) => {
+  const { pageTitle, title, category, paragraphs } = req.body;
+   // Convert paragraphs to JSON
+
+  const sql =
+    "INSERT INTO new_posts (pageTitle, title, category, paragraphs) VALUES (?, ?, ?, ?)";
+  const values = [pageTitle, title, category, paragraphs];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error inserting post into the database:", err);
+      return res.status(500).json({ message: "Error creating post" });
     }
+    const createdPost = {
+      id: result.insertId,
+      pageTitle,
+      title,
+      category,
+      paragraphs,
+    };
+    res.status(201).json(createdPost);  // Return the created post as a JSON response
+  });
 });
 
-// Route for editing beauty posts via ID
-app.put("/api/beauty/:id", (req, res) => {
-    const postId = parseInt(req.params.id);
-    const post = beautyPosts.find((post) => post.id === postId);
+app.put("/api/newpost/:id", (req, res) => {
+const id = req.params.id;
+const sql = `UPDATE new_posts SET pageTitle = ?, title = ?, category = ?, paragraphs = ? WHERE id = ?`;
+const values = [req.body.pageTitle, req.body.title, req.body.category, req.body.paragraphs, req.params.id];
 
-    console.log("Before update:", post);  
-    
-    if (post) {
-        post.pageTitle = req.body.pageTitle || post.pageTitle;
-        post.category = req.body.category || post.category;
-        post.title = req.body.title || post.title;
-        post.subTitle = req.body.subTitle || post.subTitle;
-        post.paragraphs = req.body.content || post.paragraphs;
+db.query(sql, values, (err, result) => {
+  if (err) return res.json(err);
 
-        console.log("After update:", post);  
-        res.json(post);
-    } else {
-        res.status(404).json({ message: "Post not found."});
-    }
+  return res.json({
+    id: id,
+    pageTitle: req.body.pageTitle,
+    title: req.body.title,
+    category: req.body.category,
+    paragraphs: req.body.paragraphs,
+    message: "Post updated successfully",
+  });
+});
 });
 
-// Route for editing lifestyle posts via ID
-app.put("/api/lifestyle/:id", (req, res) => {
-    const postId = parseInt(req.params.id);
-    const post = lifestylePosts.find((post) => post.id === postId);
 
-    console.log("Before update:", post);  
-    
-    if (post) {
-        post.pageTitle = req.body.pageTitle || post.pageTitle;
-        post.category = req.body.category || post.category;
-        post.title = req.body.title || post.title;
-        post.subTitle = req.body.subTitle || post.subTitle;
-        post.paragraphs = req.body.content || post.paragraphs;
-
-        console.log("After update:", post);  
-        res.json(post);
-    } else {
-        res.status(404).json({ message: "Post not found."});
-    }
-});
-
-// Route for deleting posts
-// Route fashion posts
-app.delete("/api/fashion/:id", (req, res) => {
-    const postId =parseInt(req.params.id);
-    const postIndex = fashionPosts.findIndex((p) => p.id === postId);
-
-    if (postIndex !== -1) {
-    const deletedPost = fashionPosts.splice(postIndex, 1);
-    res.json(deletedPost[0]);
-    } else {
-        res.status(404).json({ message: "Post not found."});  
-    }
-});
-
-// Route beauty posts
-app.delete("/api/beauty/:id", (req, res) => {
-    const postId =parseInt(req.params.id);
-    const postIndex = beautyPosts.findIndex((p) => p.id === postId);
-
-    if (postIndex !== -1) {
-    const deletedPost = beautyPosts.splice(postIndex, 1);
-    res.json(deletedPost[0]);
-    } else {
-        res.status(404).json({ message: "Post not found."});  
-    }
-});
-
-// Route lifestyle posts
-app.delete("/api/lifestyle/:id", (req, res) => {
-    const postId =parseInt(req.params.id);
-    const postIndex = lifestylePosts.find((p) => p.id === postId);
-
-    if (postIndex !== -1) {
-    const deletedPost = lifestylePosts.splice(postIndex, 1);
-    res.json(deletedPost[0]);
-    } else {
-        res.status(404).json({ message: "Post not found."});  
-    }
-});
+app.delete("/api/newpost/:id", (req, res) => {
+  const id = req.params.id;
+  const sql = `DELETE FROM new_posts WHERE id = ?`;
+  
+  db.query(sql, id, (err, result) => {
+    if (err) return res.json(err);
+  
+    return res.json({ message: "Post deleted successfully" });
+  });
+  }
+);
+  
 
 // Route for authentication
 // Route for signing up
 app.post("/api/auth/signup", async (req, res) => {
-    console.log('Signup request received:', req.body); 
     res.status(201).json({ message: 'User created successfully' });
     res.json({ message: 'Request successful' });
     });
 
+    const secretKey = process.env.JWT_SECRET_KEY;
 
 // PORT
 const PORT = process.env.PORT || 5000;
