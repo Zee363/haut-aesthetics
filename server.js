@@ -29,21 +29,21 @@ app.use("/api/newpost/", blogsRoutes);
 
 const corsOptions = {
     baseUrl: 'http://localhost:3000',
-    origin: 'http://127.0.0.1:3000', // Your frontend origin
+    origin: ['http://127.0.0.1:3000', 'https://haut-aesthetics20-zee363s-projects.vercel.app'], // Your frontend origin
     methods: ['POST','GET', 'PUT', 'DELETE'], // Allowed methods
     allowedHeaders: ['Content-Type', 'Authorization', 'Allow-Access-Cross-Origin'], // Allowed headers
 };
 
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: ['http://localhost:3000',  'https://haut-aesthetics20-zee363s-projects.vercel.app']
 }));
 
 // Connect to the database
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "haut_aesthetics_1"
+    host: process.env.DB_HOST,
+    password: process.env.DB_PASSWORD,
+    user: process.env.DB_USER,
+    database: process.env.DB_NAME
   });
 
   app.set('db', db);
@@ -481,7 +481,7 @@ app.get("/api/lifestyle/:id", async (req, res) => {
 
 // Routes to add posts to database
 app.post("/api/beauty/", (req, res) => {
-  const db = req.app.get("db"); // Assuming you're using req.app to get the database
+  const db = req.app.get("db");
   
   const { pageTitle, category, title, paragraphs, images } = req.body;
 
@@ -513,7 +513,7 @@ app.post("/api/beauty/", (req, res) => {
 });
 
 app.post("/api/fashion/", (req, res) => {
-  const db = req.app.get("db"); // Assuming you're using req.app to get the database
+  const db = req.app.get("db"); 
   
   const { pageTitle, category, title, paragraphs, images } = req.body;
 
@@ -546,7 +546,7 @@ app.post("/api/fashion/", (req, res) => {
 
 // Route for creating lifestyle posts
 app.post("/api/lifestyle/", (req, res) => {
-  const db = req.app.get("db"); // Assuming you're using req.app to get the database
+  const db = req.app.get("db"); 
   
   const { pageTitle, category, title, paragraphs, images } = req.body;
 
@@ -591,7 +591,6 @@ app.get('/api/newpost/', (req, res) => {
 // Routes for creating blog posts for all pages
 app.post("/api/newpost/", (req, res) => {
   const { pageTitle, title, category, paragraphs } = req.body;
-   // Convert paragraphs to JSON
 
   const sql =
     "INSERT INTO new_posts (pageTitle, title, category, paragraphs) VALUES (?, ?, ?, ?)";
@@ -652,8 +651,6 @@ app.post("/api/auth/signup", async (req, res) => {
     res.status(201).json({ message: 'User created successfully' });
     res.json({ message: 'Request successful' });
     });
-
-    const secretKey = process.env.JWT_SECRET_KEY;
 
 // PORT
 const PORT = process.env.PORT || 5000;
