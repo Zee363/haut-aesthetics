@@ -33,7 +33,7 @@ console.log('ORIGIN_URL:', process.env.ORIGIN_URL);
 // CORS configuration with credentials
 
 const corsOptions = {
-  origin: [ "https://haut-aesthetics20.vercel.app/", "http://localhost:3000/"
+  origin: [ `${process.env.REACT_APP_FRONTEND_URL}`, `${process.env.REACT_APP_FRONTEND_LOCAL_URL}`
   ],
   methods: ['POST', 'GET', 'PUT', 'DELETE'], // Allowed methods
   allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'Host', 'User-Agent', 'Accept', 'Accept-Encoding', 'Connection'], // Allowed headers
@@ -626,7 +626,7 @@ app.post("/api/newpost/", (req, res) => {
       category,
       paragraphs,
     };
-    res.status(201).json(createdPost);  // Return the created post as a JSON response
+    return res.status(201).json(createdPost);  // Return the created post as a JSON response
   });
 });
 
@@ -645,7 +645,7 @@ db.query(sql, values, (err, result) => {
     return res.status(404).json({ message: 'Post not found' });
 }
 
-  res.json({
+  return res.json({
     id: id,
     pageTitle: req.body.pageTitle,
     title: req.body.title,
@@ -669,7 +669,7 @@ app.delete("/api/newpost/:id", (req, res) => {
   if (result.affectedRows === 0) {
       return res.status(404).json({ message: 'Post not found' });
   }
-  res.json({ message: "Post deleted successfully" }); 
+  return res.json({ message: "Post deleted successfully" }); 
   });
   }
 );
