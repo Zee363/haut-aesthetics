@@ -24,19 +24,27 @@ app.use("/api/beauty/:id", blogsRoutes);
 app.use("/api/beauty/:id", blogsRoutes);
 app.use("/api/newpost/", blogsRoutes);
 
+console.log('FRONTEND_LOCAL_URL:', process.env.FRONTEND_LOCAL_URL);
+console.log('FRONTEND_URL:', process.env.FRONTEND_URL);
+console.log('ORIGIN_URL:', process.env.ORIGIN_URL);
+
 // Middleware
 // CORS configuration with credentials
 
 const corsOptions = {
-    baseUrl: `${process.env.FRONTEND_LOCAL_URL}`,
-    origin: ['http://127.0.0.1:3000', `${process.env.FRONTEND_URL}`, `${process.env.FRONTEND_LOCAL_URL}`], // Your frontend origin
-    methods: ['POST','GET', 'PUT', 'DELETE'], // Allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization', 'Allow-Access-Cross-Origin'], // Allowed headers
+  origin: [ 
+    process.env.FRONTEND_URL,
+    process.env.FRONTEND_LOCAL_URL
+  ],
+  methods: ['POST', 'GET', 'PUT', 'DELETE'], // Allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  credentials: true, // Enable credentials support
 };
 
-app.use(cors({
-    origin: [`${process.env.FRONTEND_LOCAL_URL}`, `${process.env.FRONTEND_URL}`]
-}));
+// CORS Middleware Setup
+app.use(cors(corsOptions));
+
+
 
 // Connect to the database
 const db = mysql.createConnection({
@@ -577,6 +585,8 @@ app.post("/api/lifestyle/", (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+app.options('*', cors(corsOptions)); // Preflight requests
 
 app.get('/api/newpost/', (req, res) => {
   const sql = 'SELECT * FROM new_posts';
