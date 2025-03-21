@@ -631,14 +631,14 @@ app.post("/api/newpost/", (req, res) => {
 });
 
 app.put("/api/newpost/:id", (req, res) => {
-const id = req.params.id;
+const { id }= req.params;
+
 const sql = `UPDATE new_posts SET pageTitle = ?, title = ?, category = ?, paragraphs = ? WHERE id = ?`;
-const values = [req.body.pageTitle, req.body.title, req.body.category, req.body.paragraphs, req.params.id];
+const values = [req.body.pageTitle, req.body.title, req.body.category, req.body.paragraphs, id];
 
 db.query(sql, values, (err, result) => {
   if (err) {;
   console.error("Error updating post:", err);
-
   return res.status(500).json({ message: "Error updating post" });
 }
   if (result.affectedRows === 0) {
@@ -646,11 +646,7 @@ db.query(sql, values, (err, result) => {
 }
 
   return res.json({
-    id: id,
-    pageTitle: req.body.pageTitle,
-    title: req.body.title,
-    category: req.body.category,
-    paragraphs: req.body.paragraphs,
+    id,
     message: "Post updated successfully",
   });
 });
