@@ -28,14 +28,14 @@ app.use("/api/newpost/", blogsRoutes);
 // CORS configuration with credentials
 
 const corsOptions = {
-    baseUrl: 'http://localhost:3000',
-    origin: ['http://127.0.0.1:3000', 'https://haut-aesthetics20-zee363s-projects.vercel.app'], // Your frontend origin
+    baseUrl: `${process.env.FRONTEND_LOCAL_URL}`,
+    origin: ['http://127.0.0.1:3000', `${process.env.FRONTEND_URL}`, `${process.env.FRONTEND_LOCAL_URL}`], // Your frontend origin
     methods: ['POST','GET', 'PUT', 'DELETE'], // Allowed methods
     allowedHeaders: ['Content-Type', 'Authorization', 'Allow-Access-Cross-Origin'], // Allowed headers
 };
 
 app.use(cors({
-    origin: ['http://localhost:3000',  'https://haut-aesthetics20-zee363s-projects.vercel.app']
+    origin: [`${process.env.FRONTEND_LOCAL_URL}`, `${process.env.FRONTEND_URL}`]
 }));
 
 // Connect to the database
