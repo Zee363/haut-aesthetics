@@ -24,22 +24,29 @@ app.use("/api/beauty/:id", blogsRoutes);
 app.use("/api/beauty/:id", blogsRoutes);
 app.use("/api/newpost/", blogsRoutes);
 
-console.log('FRONTEND_LOCAL_URL:', process.env.FRONTEND_LOCAL_URL);
-console.log('FRONTEND_URL:', process.env.FRONTEND_URL);
+console.log('FRONTEND_LOCAL_URL:', process.env.REACT_APP_FRONTEND_LOCAL_URL);
+console.log('FRONTEND_URL:', process.env.REACT_APP_FRONTEND_URL);
 console.log('ORIGIN_URL:', process.env.ORIGIN_URL);
+
 
 // Middleware
 // CORS configuration with credentials
 
 const corsOptions = {
-  origin: [ 
-    process.env.FRONTEND_URL,
-    process.env.FRONTEND_LOCAL_URL
+  origin: [ "https://haut-aesthetics20.vercel.app/", "http://localhost:3000/"
   ],
   methods: ['POST', 'GET', 'PUT', 'DELETE'], // Allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'Host', 'User-Agent', 'Accept', 'Accept-Encoding', 'Connection'], // Allowed headers
   credentials: true, // Enable credentials support
 };
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
 
 // CORS Middleware Setup
 app.use(cors(corsOptions));
@@ -593,9 +600,9 @@ app.get('/api/newpost/', (req, res) => {
   db.query(sql, (err, result) => {
     if (err) {
       console.error('Error getting posts:', err);
-      res.status(500).json({ message: 'Error getting posts' });
+      return res.status(500).json({ message: 'Error getting posts' });
     } 
-      res.json(result);
+      return res.json(result);
     });
   });
 
@@ -629,9 +636,16 @@ const sql = `UPDATE new_posts SET pageTitle = ?, title = ?, category = ?, paragr
 const values = [req.body.pageTitle, req.body.title, req.body.category, req.body.paragraphs, req.params.id];
 
 db.query(sql, values, (err, result) => {
-  if (err) return res.json(err);
+  if (err) {;
+  console.error("Error updating post:", err);
 
-  return res.json({
+  return res.status(500).json({ message: "Error updating post" });
+}
+  if (result.affectedRows === 0) {
+    return res.status(404).json({ message: 'Post not found' });
+}
+
+  res.json({
     id: id,
     pageTitle: req.body.pageTitle,
     title: req.body.title,
@@ -648,9 +662,14 @@ app.delete("/api/newpost/:id", (req, res) => {
   const sql = `DELETE FROM new_posts WHERE id = ?`;
   
   db.query(sql, id, (err, result) => {
-    if (err) return res.json(err);
-  
-    return res.json({ message: "Post deleted successfully" });
+    if (err) {
+      console.error("Error deleting post:", err);
+      return res.status(500).json({ message: "Error deleting post" });
+  }
+  if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Post not found' });
+  }
+  res.json({ message: "Post deleted successfully" }); 
   });
   }
 );
