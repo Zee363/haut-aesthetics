@@ -631,7 +631,7 @@ app.post("/api/newpost/", (req, res) => {
 });
 
 app.put("/api/newpost/:id", (req, res) => {
-const { id }= req.params;
+const id = req.params.id;
 
 const sql = `UPDATE new_posts SET pageTitle = ?, title = ?, category = ?, paragraphs = ? WHERE id = ?`;
 const values = [req.body.pageTitle, req.body.title, req.body.category, req.body.paragraphs, id];
