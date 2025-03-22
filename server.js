@@ -346,7 +346,7 @@ const fashionPosts = [
         "Here's to 26! I'm still here, not because I'm great or because I deserve to be here, but because God is not done with me. Luke 2:52 🤍 prayer - wholistic growth in wisdom, statue and increase in favour with God.",
         "Sending you all love & light.",
       ],
-      images: ["/personal1.9.1.jpg", "/personAl1.9.2.jpg"],
+      images: ["/personal1.9.1.jpg", "/personal1.9.2.jpg"],
     },
     
           {
